@@ -92,3 +92,10 @@ log
 
 # Coredumps
 *.core
+
+# nix
+.envrc
+.direnv
+
+# VSCode workspaces
+*.code-workspace
