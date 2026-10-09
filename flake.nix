@@ -17,6 +17,7 @@
       {
         devShells.default = pkgs.callPackage (
           {
+            pkgs,
             stdenv,
             mkShell,
             rustup,
