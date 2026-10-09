@@ -41,6 +41,8 @@
               export PATH="''${CARGO_HOME:-$HOME/.cargo}/bin":"$PATH"
               export PATH="''${RUSTUP_HOME:-$HOME/.rustup}/toolchains/$RUSTC_VERSION-${stdenv.hostPlatform.rust.rustcTarget}/bin":"$PATH"
               export PATH="''${PKG_CONFIG_PATH:-${pkgs.openssl.dev}/lib/pkgconfig}":"$PATH"
+              export PATH="''${OPENSSL_DIR:-${pkgs.openssl}}":"$PATH"
+
             '';
           }
         ) { };
