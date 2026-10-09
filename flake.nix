@@ -29,7 +29,9 @@
               rustPlatform.bindgenHook
             ];
             # libraries here
-            buildInputs = [ ];
+            buildInputs = [
+              pkgs.cmake
+            ];
             RUSTC_VERSION = overrides.toolchain.channel;
             shellHook = ''
               export PATH="''${CARGO_HOME:-~/.cargo}/bin":"$PATH"
