@@ -17,22 +17,21 @@
       {
         devShells.default = pkgs.callPackage (
           {
-            pkgs,
             stdenv,
             mkShell,
             rustup,
             rustPlatform,
+            cmake
           }:
           mkShell {
             strictDeps = true;
             nativeBuildInputs = [
               rustup
               rustPlatform.bindgenHook
+              cmake
             ];
             # libraries here
-            buildInputs = [
-              pkgs.cmake
-            ];
+            buildInputs = [ ];
             RUSTC_VERSION = overrides.toolchain.channel;
             shellHook = ''
               export PATH="''${CARGO_HOME:-~/.cargo}/bin":"$PATH"
