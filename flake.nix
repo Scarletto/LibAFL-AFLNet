@@ -23,7 +23,9 @@
             rustPlatform,
             cmake,
             openssl,
-            pkg-config
+            pkg-config,
+            python314,
+            llvmPackages
           }:
           mkShell {
             strictDeps = true;
@@ -31,18 +33,20 @@
               rustup
               rustPlatform.bindgenHook
               cmake
-              openssl
               pkg-config
+              python314
             ];
             # libraries here
-            buildInputs = [ ];
+            buildInputs = [
+              openssl
+              llvmPackages.compiler-rt.dev
+            ];
             RUSTC_VERSION = overrides.toolchain.channel;
             shellHook = ''
+                export CPATH="${llvmPackages.compiler-rt.dev}/include''${CPATH:+:$CPATH}"
+                export BINDGEN_EXTRA_CLANG_ARGS="$BINDGEN_EXTRA_CLANG_ARGS -isystem ${llvmPackages.compiler-rt.dev}/include"
               export PATH="''${CARGO_HOME:-$HOME/.cargo}/bin":"$PATH"
               export PATH="''${RUSTUP_HOME:-$HOME/.rustup}/toolchains/$RUSTC_VERSION-${stdenv.hostPlatform.rust.rustcTarget}/bin":"$PATH"
-              export PATH="''${PKG_CONFIG_PATH:-${pkgs.openssl.dev}/lib/pkgconfig}":"$PATH"
-              export PATH="''${OPENSSL_DIR:-${pkgs.openssl}}":"$PATH"
-
             '';
           }
         ) { };
