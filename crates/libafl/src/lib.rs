@@ -74,6 +74,7 @@ pub mod observers;
 pub mod schedulers;
 pub mod stages;
 pub mod state;
+pub mod state_machine;
 
 pub use fuzzer::*;
 pub use libafl_bolts::{Error, nonzero};
@@ -84,7 +85,7 @@ pub mod prelude {
     #![expect(ambiguous_glob_reexports)]
 
     pub use super::{
-        corpus::*, events::*, executors::*, feedbacks::*, generators::*, inputs::*, monitors::*,
+        corpus::*, contexts::*, events::*, executors::*, feedbacks::*, generators::*, inputs::*, monitors::*,
         mutators::*, observers::*, schedulers::*, stages::*, state::*, *,
     };
 }
