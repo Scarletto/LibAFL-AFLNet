@@ -1,11 +1,12 @@
 //! A state machine maintains information relevant during a state-aware fuzzing process.
-
-mod feedback;
-
 use core::{fmt::Debug, hash::Hash};
 
 use crate::Error;
 use serde::{Deserialize, Serialize};
+
+mod fuzzer;
+mod feedback;
+mod observer;
 
 /// Trait for elements offering an internal state machine
 pub trait HasStateMachine<I> {
