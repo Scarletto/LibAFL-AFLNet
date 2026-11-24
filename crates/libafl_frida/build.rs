@@ -35,11 +35,10 @@ fn main() {
             .cpp(true)
             .file("test_harness.cpp")
             .get_compiler();
-        let mut cmd = std::process::Command::new(compiler.path());
-        let cmd = cmd
-            .args(compiler.args())
-            .arg("test_harness.cpp")
-            .arg("/link");
+        // Preserve the arguments and environment discovered by `cc`, including
+        // MSVC's INCLUDE, LIB, and PATH outside a Visual Studio developer shell.
+        let mut cmd = compiler.to_command();
+        let cmd = cmd.arg("test_harness.cpp").arg("/link");
 
         #[cfg(unix)]
         let cmd = cmd
