@@ -4,9 +4,9 @@ use core::{fmt::Debug, hash::Hash};
 use crate::Error;
 use serde::{Deserialize, Serialize};
 
+mod feedbacks;
 mod fuzzer;
-mod feedback;
-mod observer;
+mod observers;
 
 /// Trait for elements offering an internal state machine
 pub trait HasStateMachine<I> {
